@@ -1,0 +1,12 @@
+products:
+   src/gatling/simulations/GetComputersSimulation.scala -> build/classes/scala/gatling/GetComputersSimulation.class
+binary dependencies:
+   src/gatling/simulations/GetComputersSimulation.scala -> /Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/lib/rt.jar
+   src/gatling/simulations/GetComputersSimulation.scala -> /Users/lovely.munjal/.gradle/caches/modules-2/files-2.1/io.gatling/gatling-commons/3.0.0/9ad3e9fe1c03beaafa97a2b45e2beadefa3da3e9/gatling-commons-3.0.0.jar
+   src/gatling/simulations/GetComputersSimulation.scala -> /Users/lovely.munjal/.gradle/caches/modules-2/files-2.1/io.gatling/gatling-core/3.0.0/33a67459c9a811f07402a20e5412ee68a858c00e/gatling-core-3.0.0.jar
+   src/gatling/simulations/GetComputersSimulation.scala -> /Users/lovely.munjal/.gradle/caches/modules-2/files-2.1/io.gatling/gatling-http/3.0.0/3cfa9ad0f8c97c8b52ec3595d0dddccc94aebdc7/gatling-http-3.0.0.jar
+   src/gatling/simulations/GetComputersSimulation.scala -> /Users/lovely.munjal/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.7/18c09ad08ec783f5074f4a0d6308a78759000cb1/scala-library-2.12.7.jar
+source dependencies:
+external dependencies:
+class names:
+   src/gatling/simulations/GetComputersSimulation.scala -> GetComputersSimulation
