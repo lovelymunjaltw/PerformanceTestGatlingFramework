@@ -12,11 +12,10 @@ class ChainExampleSimulation extends Simulation {
   val numberOfUsers = (System.getenv("NUMBER_OF_USERS")).toInt
 
   val httpProtocol = http
-    .baseUrl(baseURL)
 
   val scn: ScenarioBuilder = scenario("Chain Test")
     .exec(http("Get all objects")
-      .get("")
+      .get(baseURL)
       .check(status.is(200))
       .check(jsonPath("$.objects[0]").saveAs("firstObject")))
 
@@ -37,5 +36,6 @@ class ChainExampleSimulation extends Simulation {
 }
 
 // This type of Simulation is used in Performance test of a complete flow include multiple APIs.
-// We can store and use variable in any further request (same as real life scenario)
-// Can add multiple check (status code and/or response etc.)
+// We can store and use variable in any further requests (same as real life scenario).
+// Can add multiple check (status code and/or response etc.
+// Scope of variobale is in same scenario.
