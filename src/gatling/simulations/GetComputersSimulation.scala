@@ -4,38 +4,31 @@ import io.gatling.http.Predef.{http, _}
 
 class GetComputersSimulation extends Simulation {
 
-  before {
-    println("GetComputersSimulation is about to start!")
-  }
-
-  //val baseURL = System.getenv("BASE_URL")
   val baseURL: String = "http://computer-database.gatling.io"
   val numberOfUsers = (System.getenv("NUMBER_OF_USERS")).toInt
   val runDuration = (System.getenv("RUN_DURATION")).toInt
-  val jsonContentType = "application/json"
 
+//  We can pass header like below in any request:
 //  val headers = Map(
-//    "Accept" -> "application/json, text/plain, */*"
+//    "Accept" -> "application/json, text/plain, */*",
+//    "Accept-Encoding" -> "gzip, deflate, br"
 //     )
 
   val httpProtocol = http
     .baseUrl(baseURL)
-    .inferHtmlResources()
-    .contentTypeHeader(jsonContentType)
-    .userAgentHeader("curl/7.61.0")
+    //.userAgentHeader("curl/7.61.0") //For this test, headers are not required
     //.headers(headers)
 
+  //The User-Agent request header contains a characteristic string that allows the network protocol peers to identify the application
+  // type, operating system, software vendor or software version of the requesting software user agent
 
-  val scn: ScenarioBuilder = scenario("Get Computes Test")
-    .exec(http("GET Computes Test")
-      .get(baseURL + "/computers")
+  val scn: ScenarioBuilder = scenario("Get Computers Test")
+      .exec(http("GET Computers")
+      .get("/computers")
       .check(status.is(200)))
 
     setUp(scn.inject(constantUsersPerSec(numberOfUsers) during (runDuration))
     .protocols(httpProtocol))
     .assertions(global.successfulRequests.percent.gt(99))
 
-  after {
-    println("GetComputersSimulation is finished!")
-  }
 }

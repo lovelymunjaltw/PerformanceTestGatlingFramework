@@ -13,5 +13,3 @@ Note:
 NUMBER_OF_USERS=<any number> RUN_DURATION=<any number> gradle gatlingRun-SimulationName
 
 Example: NUMBER_OF_USERS=5 RUN_DURATION=10 gradle gatlingRun-GetComputerSimulation
-     
-
