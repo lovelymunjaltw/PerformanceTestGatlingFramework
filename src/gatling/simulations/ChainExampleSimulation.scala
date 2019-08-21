@@ -23,8 +23,8 @@ class ChainExampleSimulation extends Simulation {
     .exec(http("Get an object:" + "${firstObject}")
       .get("http://api.jmeter.ninja/objects/"+ "${firstObject}" + ".json")
       .check(status.is(200))
-      //.check(jsonPath("$.result").is("OK")) // this will pass
-      .check(jsonPath("$.result").is("OKK")) //this should fail
+      .check(jsonPath("$.result").is("OK")) // this will pass
+      //.check(jsonPath("$.result").is("OKK")) //this should fail
     )
 
     setUp(scn.inject(atOnceUsers(numberOfUsers))
@@ -35,3 +35,7 @@ class ChainExampleSimulation extends Simulation {
     println("ChainExampleSimulation is finished!")
   }
 }
+
+// This type of Simulation is used in Performance test of a complete flow include multiple APIs.
+// We can store and use variable in any further request (same as real life scenario)
+// Can add multiple check (status code and/or response etc.)
