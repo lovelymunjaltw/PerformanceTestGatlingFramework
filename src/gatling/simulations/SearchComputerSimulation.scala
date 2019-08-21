@@ -23,7 +23,7 @@ class SearchComputerSimulation extends Simulation {
       .get("/computers?f=" + "${Name}")
       .check(status.is(200)))
 
-    setUp(scn.inject(rampUsers(numberOfUsers) over (runDuration))
+    setUp(scn.inject(rampUsers(numberOfUsers) during (runDuration))
     .protocols(httpProtocol))
     .assertions(global.successfulRequests.percent.gt(99))
 
