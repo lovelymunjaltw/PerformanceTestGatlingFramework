@@ -16,6 +16,8 @@ class MultipleScenarioSimulation extends Simulation {
     .baseUrl(baseURL)
 
   val feeder = csv("ComputerName.csv").circular
+  val feederId = csv("Id.csv").random
+
 
   val scn1: ScenarioBuilder = scenario("Get Computers")
     .exec(http("Get Computers")
@@ -23,8 +25,9 @@ class MultipleScenarioSimulation extends Simulation {
       .check(status.is(200)))
 
   val scn2: ScenarioBuilder = scenario("Get a Computer")
-    .exec (http("Get Computer by id")
-      .get("/18")
+    .feed(feederId)
+    .exec (http("Get Computer by id:" + "${Id}")
+      .get("/" + "${Id}" )
       .check(status.is(200)))
 
   val scn3: ScenarioBuilder = scenario("Search Computer")
@@ -34,8 +37,9 @@ class MultipleScenarioSimulation extends Simulation {
       .check(status.is(200)))
 
   val scn4: ScenarioBuilder = scenario("Goto next page")
-    .exec (http("Goto page:" + scala.util.Random.nextInt(10))
-      .get("?p=" + scala.util.Random.nextInt(10))
+    .feed(feederId)
+    .exec (http("Goto page:" + "${Id}")
+      .get("?p=" + "${Id}")
       .check(status.is(200)))
 
   val scn5: ScenarioBuilder = scenario("Click Add new Computer")

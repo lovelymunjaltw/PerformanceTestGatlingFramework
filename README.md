@@ -1,7 +1,7 @@
 # git repo: https://github.com/lovelymunjaltw/PerformanceTestGatlingFramework.git
 
 # Run all gatling tests in src/gatling/simulations: 
-NUMBER_OF_USERS=<any number> RUN_DURATION=<any number> gradle gatlingRun
+NUMBER_OF_USERS=<any number> RUN_DURATION=<any number> ./gradlew gatlingRun
 
 Note: 
 1. NUMBER_OF_USERS and RUN_DURATION are Env variables defined in simulation scala script.
@@ -10,6 +10,6 @@ Note:
 4. Scala file naming convention should be: "*Simulation*.scala". We can change the configuration. 
 
 # Run a specific gatling test:
-NUMBER_OF_USERS=<any number> RUN_DURATION=<any number> gradle gatlingRun-SimulationName
+NUMBER_OF_USERS=<any number> RUN_DURATION=<any number> ./gradlew gatlingRun-SimulationName
 
-Example: NUMBER_OF_USERS=5 RUN_DURATION=10 gradle gatlingRun-GetComputerSimulation
+Example: NUMBER_OF_USERS=5 RUN_DURATION=10 ./gradlew gatlingRun-GetComputersSimulation
