@@ -9,11 +9,15 @@ class MultipleScenarioSimulation extends Simulation {
   }
 
   val baseURL: String = "http://computer-database.gatling.io/computers"
+  val baseURL2: String = "http://computer-database.gatling.io/computers/new"
   val numberOfUsers = (System.getenv("NUMBER_OF_USERS")).toInt
   val runDuration = (System.getenv("RUN_DURATION")).toInt
 
   val httpProtocol = http
     .baseUrl(baseURL)
+
+  val httpProtocol2 = http
+    .baseUrl(baseURL2)
 
   val feeder = csv("ComputerName.csv").circular
   val feederId = csv("Id.csv").random
@@ -44,11 +48,11 @@ class MultipleScenarioSimulation extends Simulation {
 
   val scn5: ScenarioBuilder = scenario("Click Add new Computer")
     .exec (http("Click Add new Computer")
-      .get("/new")
+      .get("")
       .check(status.is(200)))
 
-    setUp(scn1.inject(atOnceUsers(numberOfUsers))
-    .protocols(httpProtocol),
+    setUp(scn1.inject(atOnceUsers(numberOfUsers)) //For E2E scenario,we can use same or different httpProtocol for each scenario.
+      .protocols(httpProtocol),
       scn2.inject(constantUsersPerSec(numberOfUsers) during (runDuration))
         .protocols(httpProtocol),
       scn3.inject(rampUsers(numberOfUsers) during (runDuration))
@@ -56,7 +60,7 @@ class MultipleScenarioSimulation extends Simulation {
       scn4.inject(constantUsersPerSec(numberOfUsers) during (runDuration))
         .protocols(httpProtocol),
       scn5.inject(constantUsersPerSec(numberOfUsers) during (runDuration))
-        .protocols(httpProtocol))
+        .protocols(httpProtocol2)) // here using different httpProtocol2
     .assertions(global.successfulRequests.percent.gt(99))
 
   after {

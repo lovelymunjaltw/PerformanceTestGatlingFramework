@@ -15,14 +15,15 @@ class ChainExampleSimulation extends Simulation {
 
   val scn: ScenarioBuilder = scenario("Chain Test")
     .exec(http("Get all objects")
-      .get(baseURL)
-      .check(status.is(200))
-      .check(jsonPath("$.objects[0]").saveAs("firstObject")))
+        .get(baseURL)
+        .check(status.is(200))
+        .check(jsonPath("$.objects[0]").saveAs("firstObject")))
+        .pause(5) //pause time beofre next request execute. Useful when response takes time
 
     .exec(http("Get an object:" + "${firstObject}")
-      .get("http://api.jmeter.ninja/objects/"+ "${firstObject}" + ".json")
-      .check(status.is(200))
-      .check(jsonPath("$.result").is("OK")) // this will pass
+        .get("http://api.jmeter.ninja/objects/"+ "${firstObject}" + ".json")
+        .check(status.is(200))
+        .check(jsonPath("$.result").is("OK")) // this will pass
       //.check(jsonPath("$.result").is("OKK")) //this should fail
     )
 
@@ -34,7 +35,6 @@ class ChainExampleSimulation extends Simulation {
     println("ChainExampleSimulation is finished!")
   }
 }
-
 // This type of Simulation is used in Performance test of a complete flow include multiple APIs.
 // We can store and use variable in any further requests (same as real life scenario).
 // Can add multiple check (status code and/or response etc.
