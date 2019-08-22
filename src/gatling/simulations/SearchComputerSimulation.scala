@@ -17,7 +17,7 @@ class SearchComputerSimulation extends Simulation {
 
   val feeder = csv("ComputerName.csv").circular
 
-  val scn: ScenarioBuilder = scenario("Search Computer Test")
+  val scn: ScenarioBuilder = scenario ("Search Computer Test")
     .feed(feeder)
     .exec(http("Search Computer:" + "${Name}")
       .get("/computers?f=" + "${Name}")
