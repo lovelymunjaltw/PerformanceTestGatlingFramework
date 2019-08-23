@@ -23,12 +23,14 @@ class GetComputersSimulation extends Simulation {
   // type, operating system, software vendor or software version of the requesting software user agent
 
   val scn: ScenarioBuilder = scenario("Get Computers Test")
-      .exec(http("GET Computers")
+    .repeat(3){
+      exec (http("GET Computers")
       .get("/computers")
       .check(status.is(200)))
+      .pause(10) // after each iteration wait for 10 sec
+  }
 
     setUp(scn.inject(constantUsersPerSec(numberOfUsers) during (runDuration))
     .protocols(httpProtocol))
     .assertions(global.successfulRequests.percent.gt(99))
-
 }
